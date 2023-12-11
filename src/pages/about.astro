@@ -1,20 +1,93 @@
 ---
+// these are code fences in astro btw.
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
+const pageTitle = "About Dhaniel.";
+// complex data structures - objects & array
+const identity = {
+  firstName: "Abati",
+  lastName: "Babatunde",
+  country: "Nigeria",
+  occupation: "Technical Learner",
+  hobbies: ["Running", "Swimming", "Reading", "Watching Movies", "Music"],
+};
+const skills = [
+  "Javascript",
+  "Typescript",
+  "React",
+  "Angular",
+  "GSAP",
+  "Astro",
+];
+// conditional rendering
+const levelledUp = true;
+const levelledDown = false;
+const goal = 10;
+
+// styles
+const color = "blue";
+const weight = "bold";
+const textcase = "uppercase";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-        <h1>About Me</h1>
-		<h3>Dhaniel is going to be the world's biggest talent.</h3>
-        <p>He just needs to work better & faster.</p>
-        <a href="/blog/">Blog</a>
-        <a href="/about">About Me.</a>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <style define:vars={{ color, weight, textcase }}>
+      h1 {
+        color: Red;
+        font-size: 4rem;
+        font-weight: 600;
+      }
+      .skills {
+        color: var(--color);
+        font-weight: var(--weight);
+        text-transform: var(--textcase);
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <h1>About Me</h1>
+    <h3>Dhaniel is going to be the world's biggest talent.</h3>
+    <p>He just needs to work better & faster.</p>
+    <ul>
+      <li>My name is {identity.firstName} {identity.lastName}</li>
+      <li>I work from {identity.country}</li>
+      <li>
+        I'm a {identity.occupation}, cause i enjoy learning technical tools &
+        libraries
+      </li>
+      <li>
+        Here are the things i enjoy doing when i'm not chugging on codes: {
+          identity.hobbies.join(", ")
+        }
+      </li>
+      <ul>
+        Here are my skillset: {
+          skills.map((skill) => <li class="skills">{skill}</li>)
+        }
+      </ul>
+    </ul>
+    {levelledUp && <p>Working on myself to get to the highest level i can</p>}
+    {
+      levelledDown && (
+        <p>Scared to not reaching my highest potential as a person</p>
+      )
+    }
+    {
+      goal === 10 ? (
+        <p>The goal is to reach an expert {goal} level.</p>
+      ) : (
+        <p>Or I won't be just that good.</p>
+      )
+    }
+    <Footer />
+  </body>
 </html>

@@ -1,0 +1,15 @@
+---
+// weird bug here, it should recognise it's env.
+const { platform, username } = Astro.props;
+---
+
+<style>
+  a {
+    padding: 0.5rem 0.5rem;
+    color: white;
+    background-color: #4c1d95;
+    text-decoration: none;
+    border-radius: 20px;
+  }
+</style>
+<a href={`https://www.${platform}.com/${username}`}>{platform}</a>
